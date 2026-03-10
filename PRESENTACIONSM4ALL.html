@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SM4ALL Argentina - Presentación FIA Región IV y III</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --fia-blue: #003399;
+            --fia-light: #1a4db3;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF6B35;
+            --text-dark: #1a1a2e;
+            --text-light: #f8f9fa;
+            --gray-bg: #f0f2f5;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #000;
+            overflow: hidden;
+            color: var(--text-dark);
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px 80px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header consistente */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--fia-blue);
+        }
+
+        .fia-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--fia-blue);
+            letter-spacing: 2px;
+        }
+
+        .slide-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--fia-blue);
+            font-size: 18px;
+        }
+
+        /* Contenido principal */
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Tipografía */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 56px;
+            color: var(--fia-blue);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 42px;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            color: var(--fia-blue);
+            margin-bottom: 20px;
+        }
+
+        p, li {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.2) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .quote {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 32px;
+            color: var(--fia-blue);
+            border-left: 5px solid var(--accent-orange);
+            padding-left: 30px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        /* Elementos visuales */
+        .badge {
+            display: inline-block;
+            background: var(--fia-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .logo-box {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--fia-blue);
+            border: 2px solid var(--fia-blue);
+        }
+
+        /* Grid layouts */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .three-nodes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .node {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            text-align: center;
+            flex: 1;
+            margin: 0 15px;
+            border-top: 5px solid var(--fia-blue);
+            transition: transform 0.3s;
+        }
+
+        .node:hover {
+            transform: translateY(-5px);
+        }
+
+        .node.center {
+            border-top-color: var(--accent-orange);
+            transform: scale(1.1);
+        }
+
+        .node-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .connector {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, var(--fia-blue), var(--accent-orange));
+            top: 50%;
+            left: 20%;
+            right: 20%;
+            z-index: -1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ccc 0%, var(--accent-green) 100%);
+            border-radius: 3px;
+        }
+
+        .timeline-content {
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-point {
+            background: white;
+            padding: 25px;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 4px solid var(--fia-blue);
+        }
+
+        .timeline-point.active {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        /* Listas estilizadas */
+        .feature-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .feature-list li {
+            padding-left: 40px;
+            position: relative;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .feature-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        /* Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            border-bottom: 4px solid var(--accent-green);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* Background decorations */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(45deg, var(--fia-blue) 25%, transparent 25%),
+                linear-gradient(-45deg, var(--fia-blue) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, var(--fia-blue) 75%),
+                linear-gradient(-45deg, transparent 75%, var(--fia-blue) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            z-index: 1;
+        }
+
+        .circle-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(76,175,80,0.1) 100%);
+            z-index: 1;
+        }
+
+        /* Controles */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn {
+            background: var(--fia-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--fia-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,51,153,0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--fia-blue), var(--accent-green));
+            transition: width 0.3s;
+            z-index: 1000;
+        }
+
+        .timer {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            z-index: 1000;
+        }
+
+        /* Slide específicos */
+        .slide-1 {
+            background: linear-gradient(135deg, var(--fia-blue) 0%, #1a1a2e 100%);
+            color: white;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .slide-1 h1 {
+            color: white;
+            font-size: 72px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-1 .subtitle {
+            font-size: 32px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .slide-1 .partners {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .slide-1 .partner-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .slide-8 {
+            background: linear-gradient(135deg, var(--fia-blue) 0%, var(--accent-green) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .slide-8 h2 {
+            color: white;
+            font-size: 48px;
+        }
+
+        .slide-8 .ansv-box {
+            background: rgba(255,255,255,0.95);
+            color: var(--text-dark);
+            padding: 40px 60px;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .handshake-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide { padding: 40px; }
+            h1 { font-size: 42px; }
+            h2 { font-size: 32px; }
+            p, li { font-size: 20px; }
+            .two-column { grid-template-columns: 1fr; gap: 30px; }
+            .three-nodes { flex-direction: column; gap: 20px; }
+            .node { margin: 10px 0; width: 100%; }
+            .connector { display: none; }
+            .card-container { grid-template-columns: 1fr; }
+        }
+
+        /* Animaciones especiales */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="timer" id="timer">00:00 / 02:00</div>
+
+    <div class="presentation">
+        <!-- SLIDE 1: PORTADA -->
+        <div class="slide slide-1 active" id="slide-1">
+            <div class="slide-content">
+                <div class="badge" style="background: var(--accent-orange); display: inline-block; margin-bottom: 30px;">FIA Región IV y III | SM4ALL</div>
+                <h1>SM4ALL<br>ARGENTINA</h1>
+                <p class="subtitle">Hacia una infraestructura segura para motociclistas</p>
+
+                <div class="partners">
+                    <div class="partner-badge">🏛️ AUTOMÓVIL CLUB ARGENTINO</div>
+                    <div style="font-size: 30px; opacity: 0.8;">+</div>
+                    <div class="partner-badge">🛡️ AGENCIA NACIONAL DE SEGURIDAD VIAL</div>
+                </div>
+
+                <p style="margin-top: 60px; font-size: 20px; opacity: 0.8;">Reunión de trabajo con Clubes FIA | Marzo 2026</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: PUNTO DE PARTIDA -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <div class="fia-logo">FIA FOUNDATION</div>
+                <div class="slide-number">02 / 08</div>
+            </div>
+            <div class="bg-pattern"></div>
+            <div class="circle-decoration" style="width: 400px; height: 400px; top: -100px; right: -100px;"></div>
+
+            <div class="slide-content">
+                <div class="badge">El Punto de Partida</div>
+                <div class="quote">
+                    "Para diseñar infraestructura segura, primero necesitamos comprender con precisión dónde y cómo ocurren los siniestros"
+                </div>
+
+                <div class="two-column" style="margin-top: 40px;">
+                    <div>
+                        <h3>🏛️ Estructura de Datos en Argentina</h3>
+                        <ul class="feature-list">
+                            <li>Datos recopilados por las <span class="highlight">provincias</span></li>
+                            <li>Consolidación por la <span class="highlight">ANSV</span></li>
+                            <li>Mapa de puntos críticos de siniestralidad</li>
+                            <li>Construcción de los últimos años</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); text-align: center;">
+                        <div style="font-size: 80px; margin-bottom: 20px;">🗺️</div>
+                        <h3 style="color: var(--fia-blue);">Meta: Mapa de Calor</h3>
+                        <p>Puntos críticos de siniestralidad en motocicletas</p>
+                        <div style="margin-top: 20px; padding: 15px; background: var(--gray-bg); border-radius: 8px; font-size: 18px;">
+                            <strong>Vínculo clave:</strong> Referentes provinciales ↔ ANSV
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: NUESTRO ROL -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <div class="fia-logo">FIA FOUNDATION</div>
+                <div class="slide-number">03 / 08</div>
+            </div>
+            <div class="bg-pattern"></div>
+
+            <div class="slide-content">
+                <div class="badge">Nuestro Rol</div>
+                <h2 style="text-align: center; margin-bottom: 50px;">El Automóvil Club Argentino como <span style="color: var(--accent-orange);">Puente</span></h2>
+
+                <div class="three-nodes">
+                    <div class="connector"></div>
+                    <div class="node">
+                        <div class="node-icon">🌍</div>
+                        <h3>FIA</h3>
+                        <p style="font-size: 16px;">Conocimiento técnico internacional</p>
+                    </div>
+                    <div class="node center">
+                        <div class="node-icon">🤝</div>
+                        <h3 style="color: var(--accent-orange);">ACA</h3>
+                        <p style="font-size: 16px; font-weight: 600;">Puente institucional</p>
+                    </div>
+                    <div class="node">
+                        <div class="node-icon">📍</div>
+                        <h3>Provincias</h3>
+                        <p style="font-size: 16px;">Información territorial</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                    <h3 style="color: var(--fia-blue); margin-bottom: 15px;">🎯 Coordinación Institucional</h3>
+                    <p style="margin: 0; font-size: 22px;">Vínculo permanente con la <strong>Agencia Nacional de Seguridad Vial</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: RESILIENCIA -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <div class="fia-logo">FIA FOUNDATION</div>
+                <div class="slide-number">04 / 08</div>
+            </div>
+            <div class="bg-pattern"></div>
+
+            <div class="slide-content">
+                <div class="badge" style="background: var(--accent-orange);">2025: Año de Desafíos</div>
+                <h2>Resiliencia Institucional</h2>
+
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-point">
+                            <div style="font-size: 36px; margin-bottom: 10px;">⚠️</div>
+                            <div style="font-weight: 700; font-size: 16px;">Turbulencias</div>
+                            <div style="font-size: 12px; color: #666;">Cambios estructurales</div>
+                        </div>
+                        <div class="timeline-point active">
+                            <div style="font-size: 36px; margin-bottom: 10px;">💪</div>
+                            <div style="font-weight: 700; font-size: 16px;">Persistencia</div>
+                            <div style="font-size: 12px;">Nunca dejamos de sostener el proyecto</div>
+                        </div>
+                        <div class="timeline-point">
+                            <div style="font-size: 36px; margin-bottom: 10px;">🔄</div>
+                            <div style="font-weight: 700; font-size: 16px;">Reinvención</div>
+                            <div style="font-size: 12px; color: #666;">Repensar implementación</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(255,107,53,0.05) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--accent-orange); margin-top: 40px;">
+                    <h3 style="color: var(--accent-orange); margin-bottom: 15px;">🌎 Realidad Latinoamericana</h3>
+                    <p style="margin: 0; font-size: 22px;">Los cambios en las <strong>agendas políticas</strong> impactan directamente en la <strong>trazabilidad, definición y ejecución</strong> de las políticas públicas</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: COLABORACIÓN -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <div class="fia-logo">FIA FOUNDATION</div>
+                <div class="slide-number">05 / 08</div>
+            </div>
+            <div class="bg-pattern"></div>
+            <div class="circle-decoration" style="width: 300px; height: 300px; bottom: -50px; left: -50px; opacity: 0.5;"></div>
+
+            <div class="slide-content" style="text-align: center;">
+                <div class="badge" style="background: var(--accent-green);">Pilar Fundamental</div>
+
+                <div class="handshake-icon float">🤝</div>
+
+                <h2 style="font-size: 48px; margin-bottom: 40px;">
+                    "La colaboración entre instituciones, organismos públicos y clubes FIA es <span style="color: var(--accent-green);">clave</span> para sostener procesos de transformación en el tiempo"
+                </h2>
+
+                <div style="display: flex; justify-content: center; gap: 40px; margin-top: 50px;">
+                    <div style="background: white; padding: 25px 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: 36px; margin-bottom: 10px;">🏛️</div>
+                        <div style="font-weight: 600;">Instituciones</div>
+                    </div>
+                    <div style="font-size: 40px; color: var(--accent-green); align-self: center;">+</div>
+                    <div style="background: white; padding: 25px 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: 36px; margin-bottom: 10px;">🏢</div>
+                        <div style="font-weight: 600;">Organismos Públicos</div>
+                    </div>
+                    <div style="font-size: 40px; color: var(--accent-green); align-self: center;">+</div>
+                    <div style="background: white; padding: 25px 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: 36px; margin-bottom: 10px;">🏁</div>
+                        <div style="font-weight: 600;">Clubes FIA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: MANUAL -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <div class="fia-logo">FIA FOUNDATION</div>
+                <div class="slide-number">06 / 08</div>
+            </div>
+            <div class="bg-pattern"></div>
+
+            <div class="slide-content">
+                <div class="badge" style="background: var(--fia-blue);">Próximo Paso</div>
+                <h2>Hacia el Manual de Buenas Prácticas</h2>
+                <h3 style="color: var(--text-dark); font-weight: 400; margin-bottom: 40px;">Infraestructura segura con perspectiva motociclista</h3>
+
+                <div class="two-column">
+                    <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); text-align: center;">
+                        <div style="font-size: 100px; margin-bottom: 20px;">📘</div>
+                        <h3 style="color: var(--fia-blue);">Manual de Buenas Prácticas</h3>
+                        <p style="font-size: 18px; color: #666;">Herramienta práctica y accesible</p>
+                    </div>
+
+                    <div>
+                        <h3 style="margin-bottom: 25px;">📍 Dirigido a:</h3>
+                        <div class="card-container" style="grid-template-columns: 1fr; gap: 15px;">
+                            <div class="card" style="display: flex; align-items: center; text-align: left; padding: 20px;">
+                                <div style="font-size: 30px; margin-right: 20px;">👔</div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 18px;">Tomadores de decisión</div>
+                                </div>
+                            </div>
+                            <div class="card" style="display: flex; align-items: center; text-align: left; padding: 20px;">
+                                <div style="font-size: 30px; margin-right: 20px;">👷</div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 18px;">Ingenieros viales</div>
+                                </div>
+                            </div>
+                            <div class="card" style="display: flex; align-items: center; text-align: left; padding: 20px;">
+                                <div style="font-size: 30px; margin-right: 20px;">🏛️</div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 18px;">Autoridades provinciales</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: OBJETIVO FINAL -->
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <div class="fia-logo">FIA FOUNDATION</div>
+                <div class="slide-number">07 / 08</div>
+            </div>
+            <div class="bg-pattern"></div>
+
+            <div class="slide-content">
+                <div class="badge" style="background: var(--accent-green);">Objetivo</div>
+                <h2 style="text-align: center; margin-bottom: 50px;">Crear herramientas concretas para...</h2>
+
+                <div class="card-container">
+                    <div class="card pulse">
+                        <div class="card-icon">🏍️</div>
+                        <h3 style="color: var(--fia-blue); margin-bottom: 15px;">Mejorar la Movilidad</h3>
+                        <p style="font-size: 16px;">Entornos seguros para motociclistas</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 0.2s;">
+                        <div class="card-icon">🛡️</div>
+                        <h3 style="color: var(--fia-blue); margin-bottom: 15px;">Aumentar la Seguridad</h3>
+                        <p style="font-size: 16px;">Reducir riesgos en infraestructura</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 0.4s;">
+                        <div class="card-icon">📉</div>
+                        <h3 style="color: var(--fia-blue); margin-bottom: 15px;">Reducir Siniestralidad</h3>
+                        <p style="font-size: 16px;">Menos accidentes en próximos años</p>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, var(--fia-blue) 0%, var(--fia-light) 100%); color: white; padding: 30px; border-radius: 15px; margin-top: 50px; text-align: center;">
+                    <h3 style="color: white; margin-bottom: 15px;">👁️ Mirada Integral</h3>
+                    <p style="margin: 0; font-size: 22px; color: rgba(255,255,255,0.95);">Contemplar a <strong>todos los actores</strong> del sistema de movilidad</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: TRANSICIÓN ANSV -->
+        <div class="slide slide-8" id="slide-8">
+            <div class="slide-content" style="justify-content: center;">
+                <div class="handshake-icon" style="font-size: 100px; margin-bottom: 40px;">🤝</div>
+
+                <h2>Ahora escuchamos a nuestra<br>aliada estratégica</h2>
+
+                <div class="ansv-box">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🏛️</div>
+                    <h1 style="color: var(--fia-blue); font-size: 48px; margin-bottom: 15px;">AGENCIA NACIONAL<br>DE SEGURIDAD VIAL</h1>
+                    <p style="font-size: 24px; color: #666; margin: 0;">Su visión sobre este trabajo conjunto</p>
+                </div>
+
+                <p style="margin-top: 40px; font-size: 20px; opacity: 0.9;">Gracias por su atención</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()" id="btnPrev">◀ Anterior</button>
+        <button class="btn" onclick="nextSlide()" id="btnNext">Siguiente ▶</button>
+        <button class="btn" onclick="toggleFullscreen()" style="background: var(--accent-green);">⛶ Pantalla Completa</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+        let timerInterval;
+        let seconds = 0;
+        const maxTime = 120; // 2 minutos en segundos
+
+        function updateSlide() {
+            // Ocultar todas las slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Mostrar slide actual
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+
+            // Actualizar barra de progreso
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Actualizar botones
+            document.getElementById('btnPrev').disabled = currentSlide === 1;
+            document.getElementById('btnNext').disabled = currentSlide === totalSlides;
+
+            // Resetear timer al cambiar de slide (opcional)
+            // resetTimer();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Control con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'f' || e.key === 'F') {
+                toggleFullscreen();
+            }
+        });
+
+        // Timer
+        function updateTimer() {
+            seconds++;
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            const maxMins = Math.floor(maxTime / 60).toString().padStart(2, '0');
+            const maxSecs = (maxTime % 60).toString().padStart(2, '0');
+
+            document.getElementById('timer').textContent = `${mins}:${secs} / ${maxMins}:${maxSecs}`;
+
+            // Alerta cuando queda poco tiempo
+            if (seconds >= maxTime - 30) {
+                document.getElementById('timer').style.background = 'rgba(255,107,53,0.9)';
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            seconds = 0;
+            document.getElementById('timer').textContent = '00:00 / 02:00';
+            document.getElementById('timer').style.background = 'rgba(0,0,0,0.8)';
+            startTimer();
+        }
+
+        // Iniciar
+        updateSlide();
+        startTimer();
+
+        // Clic en slide para avanzar (opcional)
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.addEventListener('click', (e) => {
+                // Solo si no se hizo clic en un botón o control
+                if (e.target.tagName !== 'BUTTON') {
+                    const rect = slide.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    if (x > rect.width / 2) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
